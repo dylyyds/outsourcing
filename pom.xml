@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- 父模块的打包类型必须是pom -->
+    <packaging>pom</packaging>
+
+    <!-- 项目中包含的子模块 -->
+    <modules>
+        <module>outsourcing-mbg</module>
+        <module>outsourcing-security</module>
+        <module>outsourcing-portal</module>
+        <module>outsourcing-admin</module>
+        <module>outsourcing-common</module>
+    </modules>
+
+    <!-- 当前项目的父级依赖 -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.6.6</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <!-- 当前模块的项目坐标 -->
+    <groupId>com.weichuang</groupId>
+    <artifactId>outsourcing</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <name>outsourcing</name>
+    <description>Demo project for Spring Boot</description>
+
+    <!--  属性标签 -->
+    <properties>
+        <java.version>1.8</java.version>
+        <!-- 源代码文件的文件编码 -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- 项目报告的编码格式 -->
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <!-- 使用maven打包的时候跳过测试用例 -->
+        <skipTests>true</skipTests>
+        <!-- 分页插件starter的版本号-->
+        <pagehelper-starter.version>1.4.0</pagehelper-starter.version>
+        <!-- 阿里巴巴数据库连接池的starter的版本号-->
+        <druid-starter.version>1.2.8</druid-starter.version>
+        <!-- hutool 工具类库的版本号-->
+        <hutool.version>4.5.7</hutool.version>
+        <!-- swagger2的版本号-->
+        <swagger2.version>2.9.2</swagger2.version>
+        <!-- mybatis代码自动生成组件版本号-->
+        <mybatis-generator.version>1.4.0</mybatis-generator.version>
+        <!-- mybatis-springboot-starter 版本号 -->
+        <mybatis-spring-boot-starter.version>2.2.0</mybatis-spring-boot-starter.version>
+        <!-- 图片压缩工具包版本 -->
+        <thumbnailator.version>0.4.8</thumbnailator.version>
+        <!-- jwt工具版本号 -->
+        <jjwt.version>0.9.0</jjwt.version>
+        <!-- 文件上传工具包 版本号 -->
+        <commons-fileupload.version>1.4</commons-fileupload.version>
+        <!-- 文件IO操作工具包版本号-->
+        <commons-io.version>2.4</commons-io.version>
+        <!-- 阿里云javasdk，短信需要 -->
+        <aliyun-java-sdk-core.version>4.1.0</aliyun-java-sdk-core.version>
+        <!-- 阿里云相关-->
+        <aliyun-oss.version>2.5.0</aliyun-oss.version>
+        <!-- 阿里云短信 -->
+        <aliyun-java-sdk-dysmsapi.version>1.1.0</aliyun-java-sdk-dysmsapi.version>
+        <!-- outsourcing-common子模块的版本号 -->
+        <outsourcing-common.version>0.0.1-SNAPSHOT</outsourcing-common.version>
+        <!-- outsourcing-mbg子模块的版本号 -->
+        <outsourcing-mbg.version>0.0.1-SNAPSHOT</outsourcing-mbg.version>
+        <!-- outsourcing-security子模块的版本号 -->
+        <outsourcing-security.version>0.0.1-SNAPSHOT</outsourcing-security.version>
+    </properties>
+
+    <!-- 依赖管理，在该标签下的依赖并不会引入的当前项目中，这里只是生命了一下依赖和依赖版本  -->
+    <dependencyManagement>
+        <dependencies>
+            <!--MyBatis分页插件starter-->
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${pagehelper-starter.version}</version>
+            </dependency>
+            <!--集成druid连接池-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid-starter.version}</version>
+            </dependency>
+            <!-- mybatis的starter必须添加版本号 -->
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis-spring-boot-starter.version}</version>
+            </dependency>
+            <!--Hutool Java工具包-->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+            <!--Swagger-UI API文档生产工具-->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${swagger2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${swagger2.version}</version>
+            </dependency>
+            <!-- MyBatis 生成器 -->
+            <dependency>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-core</artifactId>
+                <version>${mybatis-generator.version}</version>
+            </dependency>
+            <!--JWT(Json Web Token)登录支持-->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>aliyun-java-sdk-core</artifactId>
+                <version>${aliyun-java-sdk-core.version}</version>
+                <scope>compile</scope>
+            </dependency>
+            <!-- 阿里云OSS -->
+            <dependency>
+                <groupId>com.aliyun.oss</groupId>
+                <artifactId>aliyun-sdk-oss</artifactId>
+                <version>${aliyun-oss.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>aliyun-java-sdk-dysmsapi</artifactId>
+                <version>${aliyun-java-sdk-dysmsapi.version}</version>
+                <scope>compile</scope>
+            </dependency>
+            <!-- 本项目中的outsourcing-mbg子模块依赖 -->
+            <dependency>
+                <groupId>com.qingmeng.outsourcing</groupId>
+                <artifactId>outsourcing-mbg</artifactId>
+                <version>${outsourcing-mbg.version}</version>
+            </dependency>
+            <!-- 本项目中的outsourcing-security子模块依赖 -->
+            <dependency>
+                <groupId>com.qingmeng.outsourcing</groupId>
+                <artifactId>outsourcing-security</artifactId>
+                <version>${outsourcing-security.version}</version>
+            </dependency>
+            <!-- 本项目中的outsourcing-common子模块依赖 -->
+            <dependency>
+                <groupId>com.qingmeng.outsourcing</groupId>
+                <artifactId>outsourcing-common</artifactId>
+                <version>${outsourcing-common.version}</version>
+            </dependency>
+
+            <!-- 文件上传工具包依赖 -->
+            <dependency>
+                <groupId>commons-fileupload</groupId>
+                <artifactId>commons-fileupload</artifactId>
+                <version>${commons-fileupload.version}</version>
+            </dependency>
+
+            <!-- 图片压缩依赖 -->
+            <dependency>
+                <groupId>net.coobird</groupId>
+                <artifactId>thumbnailator</artifactId>
+                <version>${thumbnailator.version}</version>
+            </dependency>
+
+            <!-- 文件IO -->
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons-io.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <!--
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+    -->
+
+</project>
